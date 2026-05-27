@@ -1,0 +1,101 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #1c1c1c;
+  color: #d0d0d0;
+  font-family: 'Courier New', monospace;
+  padding: 14px 16px;
+  user-select: none;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #555;
+  text-transform: uppercase;
+}
+
+.seq-name {
+  font-size: 10px;
+  color: #444;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Timecode display ────────────────────────────────────────────────────── */
+
+.timecode {
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: #ffffff;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.timecode.dim {
+  color: #444;
+}
+
+/* ── Status row ──────────────────────────────────────────────────────────── */
+
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.dot.disconnected { background: #444; }
+.dot.idle         { background: #e8a400; }
+.dot.seeking      { background: #e8a400; animation: blink 0.4s ease-in-out infinite; }
+.dot.playing      { background: #5cb85c; animation: blink 1.2s ease-in-out infinite; }
+.dot.stopped      { background: #c0392b; }
+.dot.error        { background: #c0392b; }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+
+.state-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #888;
+}
+
+/* ── Error detail ────────────────────────────────────────────────────────── */
+
+.error-detail {
+  margin-top: 10px;
+  font-size: 10px;
+  color: #c0392b;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.error-detail:empty {
+  display: none;
+}

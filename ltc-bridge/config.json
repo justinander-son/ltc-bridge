@@ -1,0 +1,16 @@
+{
+  "danteDeviceName": "Dante Virtual Soundcard",
+  "danteChannel": 16,
+  "sampleRate": 48000,
+  "frameRate": 30,
+  "wsPort": 8765,
+  "softDriftFrames": 9999,
+  "hardDriftFrames": 9999,
+  "driftConfirmCount": 9999,
+  "lockFramesNeeded": 6,
+  "seekLatencyFrames": 10,
+  "freewheelMs": 500,
+  "stabilizeFrames": 20,
+  "rewindConfirmCount": 2,
+  "flywheelCount": 3
+}

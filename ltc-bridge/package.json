@@ -1,0 +1,18 @@
+{
+  "name": "ltc-bridge",
+  "version": "1.0.0",
+  "description": "Reads LTC from a Dante audio channel and drives Premiere Pro transport via WebSocket",
+  "main": "bridge.js",
+  "scripts": {
+    "start": "node bridge.js",
+    "test": "node bridge.js --config=config.test.json",
+    "deploy": "cp -rX ../ltc-chase/. ~/Library/Application\\ Support/Adobe/CEP/extensions/com.studio59.ltcchase/"
+  },
+  "dependencies": {
+    "libltc-wrapper": "^1.0.0",
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
