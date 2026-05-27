@@ -1,3 +1,5 @@
+7BWRQ-5BC2Y-A7PLT-WMKWA-TOTN3
+
 # LTC Chase for Premiere Pro
 
 Makes Adobe Premiere Pro follow an external LTC timecode source delivered over a Dante audio network. When your timecode source plays, Premiere plays. When it stops, Premiere stops. When it jumps, Premiere chases there.
