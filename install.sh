@@ -13,6 +13,16 @@ PANEL_ID="com.studio59.ltcchase"
 USER_CEP=~/Library/Application\ Support/Adobe/CEP/extensions
 APP_BUNDLE_26="/Applications/Adobe Premiere Pro 2026/Adobe Premiere Pro 2026.app/Contents/CEP/extensions"
 
+# ── 0. Pre-flight checks ──────────────────────────────────────────────────────
+
+if ! command -v npm &>/dev/null; then
+  echo ""
+  echo "ERROR: npm (Node.js) is not installed."
+  echo "  Run: brew install node"
+  echo "  Then re-run this script."
+  exit 1
+fi
+
 # ── 1. Bridge dependencies ────────────────────────────────────────────────────
 
 echo ""
