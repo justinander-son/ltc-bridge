@@ -61,8 +61,9 @@ const ffmpegArgs = [
   '-hide_banner',
   '-loglevel', 'warning',
   '-f', 'avfoundation',
+  '-guess_layout_max', '0',
   '-i', `:${danteDeviceName}`,
-  '-af', `aeval=val(${channelIndex}):c=mono,aresample=${sampleRate}`,
+  '-af', `aeval=val(${channelIndex}):c=mono,aformat=sample_fmts=s16:channel_layouts=mono:sample_rates=${sampleRate}`,
   '-f', 's16le',
   'pipe:1',
 ];
