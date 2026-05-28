@@ -23,6 +23,14 @@ if ! command -v npm &>/dev/null; then
   exit 1
 fi
 
+if ! command -v sox &>/dev/null; then
+  echo ""
+  echo "ERROR: sox is not installed."
+  echo "  Run: brew install sox"
+  echo "  Then re-run this script."
+  exit 1
+fi
+
 # ── 1. Bridge dependencies ────────────────────────────────────────────────────
 
 echo ""

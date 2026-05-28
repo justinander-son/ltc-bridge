@@ -53,26 +53,25 @@ const sm = createStateMachine(config, {
   log:      console.log,
 });
 
-// ── Audio capture via ffmpeg ──────────────────────────────────────────────────
+// ── Audio capture via sox ─────────────────────────────────────────────────────
 
-const channelIndex = danteChannel - 1;
-
-const ffmpegArgs = [
-  '-hide_banner',
-  '-loglevel', 'warning',
-  '-f', 'avfoundation',
-  '-guess_layout_max', '0',
-  '-i', `:${danteDeviceName}`,
-  '-af', `aeval=val(${channelIndex}):c=mono,aformat=sample_fmts=s16:channel_layouts=mono:sample_rates=${sampleRate}`,
-  '-f', 's16le',
-  'pipe:1',
+const soxArgs = [
+  '-t', 'coreaudio',
+  danteDeviceName,
+  '-r', String(sampleRate),
+  '-e', 'signed-integer',
+  '-b', '16',
+  '-c', '1',
+  '-t', 'raw',
+  '-',
+  'remix', String(danteChannel),
 ];
 
-function startFFmpeg() {
+function startAudio() {
   console.log(`[DVS] Opening: "${danteDeviceName}", channel ${danteChannel}`);
-  console.log(`[DVS] ffmpeg args: ${ffmpegArgs.join(' ')}`);
+  console.log(`[DVS] sox args: ${soxArgs.join(' ')}`);
 
-  const ff = spawn('ffmpeg', ffmpegArgs, { stdio: ['ignore', 'pipe', 'pipe'] });
+  const ff = spawn('sox', soxArgs, { stdio: ['ignore', 'pipe', 'pipe'] });
 
   ff.stdout.on('data', (chunk) => {
     decoder.write(chunk);
@@ -86,14 +85,15 @@ function startFFmpeg() {
     const lines = stderrBuf.split('\n');
     stderrBuf = lines.pop();
     for (const line of lines) {
-      if (line.trim()) console.log('[FFMPEG]', line);
+      if (line.trim()) console.log('[SOX]', line);
     }
   });
 
   ff.on('exit', (code, signal) => {
     if (code !== 0 && signal !== 'SIGTERM') {
-      console.error(`\n[FFMPEG] Exited (code ${code}). Check device name in config.json.`);
-      console.error('[FFMPEG] Run:  ffmpeg -f avfoundation -list_devices true -i ""  to list audio devices.\n');
+      console.error(`\n[SOX] Exited (code ${code}). Check device name in config.json.`);
+      console.error('[SOX] Run:  sox -t coreaudio -n stat  to verify audio device access.');
+      console.error('[SOX] List devices with:  ffmpeg -f avfoundation -list_devices true -i ""\n');
     }
   });
 
@@ -101,7 +101,7 @@ function startFFmpeg() {
 }
 
 const decoder   = new LTCDecoder(sampleRate, frameRate, 's16');
-const ffmpegProcess = startFFmpeg();
+const ffmpegProcess = startAudio();
 
 console.log(`[LTC] Bridge running — ${sampleRate} Hz, ${frameRate} fps, Dante ch${danteChannel}`);
 console.log(`[LTC] State machine: UNLOCKED → ACQUIRING (${config.lockFramesNeeded || 6} frames) → SEEKING → LOCKED\n`);
