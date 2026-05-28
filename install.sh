@@ -1,7 +1,7 @@
 #!/bin/bash
 # LTC Chase — one-time setup script.
 # Run this once after copying the project folder to your Mac:
-#   bash ~/ltc-chase/install.sh
+#   bash ~/ltc-bridge/install.sh
 
 set -e
 

@@ -56,10 +56,10 @@ node --version
 
 ### Step 4 — Copy the project folder to this Mac
 
-Copy the `ltc-chase` folder to your Mac. A good place is your home folder:
+Copy the `ltc-bridge` folder to your Mac. A good place is your home folder:
 
 ```
-~/ltc-chase/
+~/ltc-bridge/
 ```
 
 The folder should contain two sub-folders: `ltc-bridge` and `ltc-chase`.
@@ -69,7 +69,7 @@ The folder should contain two sub-folders: `ltc-bridge` and `ltc-chase`.
 ### Step 5 — Run the installer
 
 ```bash
-bash ~/ltc-chase/install.sh
+bash ~/ltc-bridge/install.sh
 ```
 
 This installs the Node.js dependencies and the Premiere panel in one shot. It will ask for your password once (needed to install for Premiere 2026).
@@ -106,7 +106,7 @@ A small dark panel appears. Dock it wherever you like. It will say **START BRIDG
 Every time you want LTC chase, open Terminal and run:
 
 ```bash
-cd ~/ltc-chase/ltc-bridge && npm start
+cd ~/ltc-bridge/ltc-bridge && npm start
 ```
 
 You'll see:
@@ -220,7 +220,7 @@ Open `ltc-bridge/config.json` in any text editor. After changing anything, stop 
 To verify the state machine without any audio hardware:
 
 ```bash
-cd ~/ltc-chase/ltc-bridge && node test/simulate.js
+cd ~/ltc-bridge/ltc-bridge && node test/simulate.js
 ```
 
 This runs 5 synthetic scenarios (lock-up, garbage frames, forward jump, rewind, burst garbage) and reports pass/fail for each. All 5 should pass.
